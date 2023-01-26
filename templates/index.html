@@ -1,0 +1,48 @@
+<html>
+
+<body>
+    {%for event in events%}
+    <div>
+        <p>
+            The event called {{event.name}} will be held on {{event.date}}.<br>
+            Approximately {{event.num_guest}} people will be attending, it'll be held in room {{event.room}}<br>
+            A brief description has been provided by the organizers: <br>
+            {{event.description}}
+        </p>
+        <div>
+            {% if event.recurring%}
+                <span>	
+        &#9989;</span>
+        {% endif %}
+        {%if event.recurring==False%}
+        <span>
+            &#10060;
+            {%endif%}
+        </span>
+        </div>
+    </div>
+    {% endfor%}
+    <div>
+        <h2>Please add dates here!</h2>
+        <form action="/events" method="post">
+            <label for='name'>Name</label>
+                <input type="text" name="name" id="name">
+            <label for="date">Date</label>
+                <input type="date" id="date" name="date" >
+            <label for='num_guest'>Number of Guests</label>
+                <input type="text" name="num_guest" id="num_guest">            
+            <label for='room'>Room Number</label>
+                <input type="text" name="room" id="room"><br>           
+            <label for="description">Description</label>
+                <textarea name="description" id="description" rows="2" col="30"></textarea><br>
+            <input type="radio" id="recurring" name="recurring" value="recurring">
+                <label for="recurring">recurring</label><br>
+            <input type="radio" id="one_off" name="recurring" value="one_off">
+                <label for="one_off">One Of</label><br>
+            <input type="submit" value="Add event">
+  
+        </form>
+    </div>
+
+</body>
+</html>
